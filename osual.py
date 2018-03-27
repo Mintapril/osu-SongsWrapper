@@ -58,12 +58,10 @@ def startwrapper(packname, artist, creator, hp, od):
         osufile = open(osufilespath[number - 1], "r+", errors='ignore')
         for line in osufile:
             if "AudioFilename" in line:
-                audiofilename = line
-                audiofilename = audiofilename.replace("AudioFilename: ", "")
+                audiofilename = line.replace("AudioFilename: ", "")
                 audiofilename = audiofilename.strip("\n")
             if "Title:" in line:
-                songname = line
-                songname = songname.replace("Title:", "")
+                songname = line.replace("Title:", "")
                 songname = songname.strip("\n")
                 if songname == "":
                     songname = "Undefined"
@@ -73,8 +71,7 @@ def startwrapper(packname, artist, creator, hp, od):
                             '"', "").replace("<", "").replace(">", "").replace(
                                 "|", "").replace("*", "")
             if "Artist:" in line:
-                artistname = line
-                artistname = artistname.replace("Artist:", "")
+                artistname = line.replace("Artist:", "")
                 artistname = artistname.strip("\n")
                 if artistname == "":
                     artistname = "Undefined"
@@ -84,7 +81,6 @@ def startwrapper(packname, artist, creator, hp, od):
                             '"', "").replace("<", "").replace(">", "").replace(
                                 "|", "").replace("*", "")
             if "Version:" in line:
-                diff = line
                 diff = line.replace("Version:", "")
                 diff = diff.strip("\n")
                 if "\\" or "/" or ":" or "?" or '"' or "<" or ">" or "|" or "*" in diff:
@@ -93,8 +89,7 @@ def startwrapper(packname, artist, creator, hp, od):
                             "<", "").replace(">", "").replace("|", "").replace(
                                 "*", "")
             if '0,0,"' in line:
-                bg = line
-                bg = bg.replace('0,0,"', "")
+                bg = line.replace('0,0,"', "")
                 if '",0,0' in bg:
                     bg = bg.replace('",0,0', "")
                 if '"' in bg:
