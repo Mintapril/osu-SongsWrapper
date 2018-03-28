@@ -10,10 +10,6 @@ def startwrapper(packname, artist, creator, hp, od):
         pass
     else:
         artist = "Various"
-    if creator:
-        pass
-    else:
-        creator = ""
     judgment = ""
     judgment = hp.isdigit()
     if judgment is False or int(hp) > 10:
@@ -57,7 +53,7 @@ def startwrapper(packname, artist, creator, hp, od):
     while number - 1 >= 0:
         osufile = open(osufilespath[number - 1], "r+", errors='ignore')
         for line in osufile:
-            if "AudioFilename" in line:
+            if "AudioFilename:" in line:
                 audiofilename = line.replace("AudioFilename: ", "")
                 audiofilename = audiofilename.strip("\n")
             if "Title:" in line:
