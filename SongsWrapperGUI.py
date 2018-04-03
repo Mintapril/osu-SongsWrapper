@@ -70,7 +70,10 @@ class Ui_Form(object):
         cr = self.Creator.text()
         odr = self.OD.text()
         hpr = self.HP.text()
-        osual.startwrapper(pn, ar, cr, odr, hpr)    ####开始处理......   
+        artist, packname, path = osual.startwrapper(pn, ar, cr, odr, hpr)    ####开始处理...... 
+        path = osual.zipfile(artist, packname, path)
+        osual.removef(path)
+        print("Packaged successfully!")
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

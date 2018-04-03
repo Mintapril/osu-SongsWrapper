@@ -1,27 +1,27 @@
 import os
 import shutil
 import re
-def startwrapper(packname, artist, creator, hp, od):
-    if packname:
-        pass
-    else:
-        packname = "Collection 1st"
-    if artist:
-        pass
-    else:
-        artist = "Various"
-    judgment = ""
-    judgment = hp.isdigit()
-    if judgment is False or int(hp) > 10:
-        hp = "9"
-    judgment = ""
-    judgment = od.isdigit()
-    if judgment is False or int(od) > 10:
-        od = "7.5"
-    path = os.path.abspath('.')
-    ###########################################################################
-    ####读取所有osu文件信息###################
-    #######################################
+
+
+def zipfile(artist, packname, path):
+    #复制完成
+    #开始打包所有临时文件为osz
+    shutil.make_archive(artist + " - " + packname, 'zip',
+                        os.path.join(path, ".tmp"))
+    os.rename(
+        os.path.join(path, artist + " - " + packname + '.zip'),
+        os.path.join(path, artist + " - " + packname + '.osz'))
+    return path
+
+def removef(path):
+    #打包完成
+    #删除临时文件夹
+    for folder, subfolders, files in os.walk(os.path.join(path, ".tmp")):
+        for allfile in files:
+            os.remove(os.path.join(path, ".tmp", allfile))
+    os.rmdir(os.path.join(path, ".tmp"))
+
+def statistics():
     osufilespath = []  ######所有osu文件的列表
     audiofilespath = []
     for p, l, osufilenames in os.walk(".", topdown=False):
@@ -42,6 +42,46 @@ def startwrapper(packname, artist, creator, hp, od):
     if len(audiofilespath) > 32:
         print("Too many songs, please wait......")
     number = len(osufilespath)
+    return number, osufilespath
+
+def move_otherfiles(number, osufilespath, audiofilename, path, audio, pathnewosufiles, background):
+    p, f = os.path.split(osufilespath[number - 1])
+    try:
+        shutil.copyfile(
+            os.path.join(p, audiofilename), os.path.join(path, ".tmp", audio))
+    except FileNotFoundError as e:
+        print(e)
+        print("No audio file found, igloned.")
+        os.remove(pathnewosufiles)
+    try:
+        shutil.copyfile(
+            os.path.join(p, bg), os.path.join(path, ".tmp", background))
+    except FileNotFoundError as e:
+        print(e)
+        print("No background file found, igloned.")
+    
+
+def startwrapper(packname, artist, creator, hp, od):
+    if packname:
+        pass
+    else:
+        packname = "Collection 1st"
+    if artist:
+        pass
+    else:
+        artist = "Various"
+    judgment = ""
+    judgment = hp.isdigit()
+    if judgment is False or int(hp) > 10:
+        hp = "9"
+    judgment = ""
+    judgment = od.isdigit()
+    if judgment is False or int(od) > 10:
+        od = "7.5"
+    path = os.path.abspath('.')
+
+    number, osufilespath = statistics()       #####统计
+ 
     audiofilename = ""
     audioformat = ""
     backgroundformat = ""
@@ -50,6 +90,7 @@ def startwrapper(packname, artist, creator, hp, od):
     songname = ""
     diff = ""
     os.makedirs(".tmp", exist_ok=True)  #新建临时文件夹，用于存放将要打包的文件
+
     while number - 1 >= 0:
         osufile = open(osufilespath[number - 1], "r+", errors='ignore')
         for line in osufile:
@@ -85,7 +126,7 @@ def startwrapper(packname, artist, creator, hp, od):
                             "<", "").replace(">", "").replace("|", "").replace(
                                 "*", "")
             if '0,0,"' in line:
-                bg = line.replace('0,0,"', "")
+                bg = line.replace('0,0,"', "", 1)
                 if '",0,0' in bg:
                     bg = bg.replace('",0,0', "")
                 if '"' in bg:
@@ -141,32 +182,6 @@ def startwrapper(packname, artist, creator, hp, od):
             f3.write(line)
         f2.close()
         f3.close()
-        p, f = os.path.split(osufilespath[number - 1])
-        try:
-            shutil.copyfile(
-                os.path.join(p, audiofilename), os.path.join(path, ".tmp", audio))
-        except FileNotFoundError as e:
-            print(e)
-            print("No audio file found, igloned.")
-            os.remove(pathnewosufiles)
-        try:
-            shutil.copyfile(
-                os.path.join(p, bg), os.path.join(path, ".tmp", background))
-        except FileNotFoundError as e:
-            print(e)
-            print("No background file found, igloned.")
+        move_otherfiles(number, osufilespath, audiofilename, path, audio, pathnewosufiles, background)
         number = number - 1
-    #复制完成
-    #开始打包所有临时文件为osz
-    shutil.make_archive(artist + " - " + packname, 'zip',
-                        os.path.join(path, ".tmp"))
-    os.rename(
-        os.path.join(path, artist + " - " + packname + '.zip'),
-        os.path.join(path, artist + " - " + packname + '.osz'))
-    #打包完成
-    #删除临时文件夹
-    for folder, subfolders, files in os.walk(os.path.join(path, ".tmp")):
-        for allfile in files:
-            os.remove(os.path.join(path, ".tmp", allfile))
-    os.rmdir(os.path.join(path, ".tmp"))
-    print("Packaged successfully!")
+    return artist, packname, path
