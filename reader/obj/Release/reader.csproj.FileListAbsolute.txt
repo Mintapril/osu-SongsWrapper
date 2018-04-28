@@ -1,7 +1,0 @@
-C:\Users\rangt\source\repos\reader\reader\obj\Release\reader.csproj.CoreCompileInputs.cache
-C:\Users\rangt\source\repos\reader\reader\obj\Release\reader.csprojResolveAssemblyReference.cache
-C:\Users\rangt\source\repos\reader\reader\bin\Release\MapCollator.exe.config
-C:\Users\rangt\source\repos\reader\reader\bin\Release\MapCollator.exe
-C:\Users\rangt\source\repos\reader\reader\bin\Release\MapCollator.pdb
-C:\Users\rangt\source\repos\reader\reader\obj\Release\MapCollator.exe
-C:\Users\rangt\source\repos\reader\reader\obj\Release\MapCollator.pdb

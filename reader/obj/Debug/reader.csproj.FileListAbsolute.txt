@@ -1,7 +1,0 @@
-C:\Users\rangt\source\repos\reader\reader\obj\Debug\reader.csprojResolveAssemblyReference.cache
-C:\Users\rangt\source\repos\reader\reader\obj\Debug\reader.csproj.CoreCompileInputs.cache
-C:\Users\rangt\source\repos\reader\reader\bin\Debug\reader.exe.config
-C:\Users\rangt\source\repos\reader\reader\bin\Debug\reader.exe
-C:\Users\rangt\source\repos\reader\reader\bin\Debug\reader.pdb
-C:\Users\rangt\source\repos\reader\reader\obj\Debug\reader.exe
-C:\Users\rangt\source\repos\reader\reader\obj\Debug\reader.pdb
