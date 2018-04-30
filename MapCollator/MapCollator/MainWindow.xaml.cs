@@ -34,10 +34,14 @@ namespace MapCollator
             if (result == System.Windows.Forms.DialogResult.Cancel)
             {
                 return;
-
             }
             string path = folderDialog.SelectedPath.Trim();
             GlobalValue.path = PathBox.Text = path;
+            string[] pathList = IO.GetFileList(GlobalValue.path, true);
+            foreach (var item in pathList)
+            {
+                FileBox.Items.Add(item.Replace(System.IO.Path.GetDirectoryName(item), ""));
+            }
 
         }
 
@@ -48,7 +52,41 @@ namespace MapCollator
             string creator = CreatorBox.Text.ToString();
             string OD = ODBox.Text.ToString();
             string HP = HPBox.Text.ToString();
-            App.Program.Start(GlobalValue.path, packName, artists, creator, OD, HP);
+            //检查用户是否选择了文件夹
+            if (GlobalValue.path == null)
+            {
+                System.Windows.MessageBox.Show("Please select the file path!", "Error");
+            }
+            else
+            {
+                //检查hp和od的值是否合法
+                if (double.TryParse(OD, out App.Program.od) == false)
+                {
+                    App.Program.ShowErrorMessageBox();
+                }
+                else if (App.Program.od > 10 || App.Program.od < 0)
+                {
+                    App.Program.ShowErrorMessageBox();
+                }
+                else
+                {
+                    if (double.TryParse(HP, out App.Program.hp) == false)
+                    {
+                        App.Program.ShowErrorMessageBox();
+                    }
+                    else if (App.Program.hp > 10 || App.Program.hp < 0)
+                    {
+                        App.Program.ShowErrorMessageBox();
+                    }
+                    else
+                    {
+                        App.Program.Start(GlobalValue.path, packName, artists, creator, OD, HP);
+                        PathBox.Clear();
+                        FileBox.Items.Clear();
+                    }
+
+                }
+            }
 
         }
     }

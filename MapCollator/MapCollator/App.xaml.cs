@@ -23,6 +23,13 @@ namespace MapCollator
     {
         public class Program
         {
+            public static double od;
+            public static double hp;
+            public static void ShowErrorMessageBox()
+            {
+                MessageBox.Show("The value of OD or HP must be an integer or floating-point number and must be between 0 and 10.", "Error");
+            }
+
             public static void Start(string path, string packName, string artists, string creator, string OD, string HP)
             {
 
@@ -32,9 +39,10 @@ namespace MapCollator
 
                 if (path != String.Empty)
                 {
-                    List<string> allFileList = IO.GetFileList(path);
+                    IO.GetFileList(path);
+                    
                     //循环读取每个osu文件以及修改
-                    foreach (string item in allFileList)
+                    foreach (string item in IO.allFileList)
                     {
                         if (item.Contains(".osu"))
                         {
@@ -166,7 +174,7 @@ namespace MapCollator
                 File.Copy(oldAudioFilePath, newAudioFilePath);
                 File.Copy(oldBgFilePath, newBgFilePath);
             }
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
             {
             }
             catch (IOException)
@@ -179,21 +187,32 @@ namespace MapCollator
             };
             return datas;
         }
+        public static string[] fileList;
+        public static List<string> allFileList = new List<string>();
         //遍历文件夹
-        public static List<string> GetFileList(string rootPath)
+        public static void GetFileList(string rootPath)
         {
             string[] pathList = Directory.GetDirectories(rootPath);
-            string[] fileList;
-            List<string> allFileList = new List<string>();
             foreach (string item in pathList)
             {
-                fileList = Directory.GetFiles(item);
-                foreach (string file in fileList)
-                {
-                    allFileList.Add(file);
-                }
+                GetPathList(item);
             }
-            return allFileList;
+
+        }
+        public static string[] GetFileList(string rootPath, bool ShowPathInBox)
+        {
+            string[] pathList = Directory.GetDirectories(rootPath);
+            return pathList;
+        }
+
+        public static void GetPathList(string item)
+        {
+            fileList = Directory.GetFiles(item);
+            foreach (string file in fileList)
+            {
+                allFileList.Add(file);
+            }
+
         }
         public static string FilterIllegalChars(string path)
         {

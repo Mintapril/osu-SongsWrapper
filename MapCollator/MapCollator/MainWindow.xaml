@@ -5,21 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MapCollator"
         mc:Ignorable="d"
-        Title="MapCollator by mint" Height="359.806" Width="400" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
-	<Grid Margin="0,0,393.722,-0.443">
-		<TextBox x:Name="PathBox" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="247" Margin="21,27,-268,0" HorizontalAlignment="Center" FontSize="14" IsEnabled="False"/>
-		<Button x:Name="Botton" Content="..." Margin="284,27,-358,0" VerticalAlignment="Top" Width="74" Height="24" HorizontalAlignment="Center" Click="Botton_Click"/>
-		<Label Content="Pack Name:" HorizontalAlignment="Left" Margin="21,66,-121,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="14"/>
-		<Label Content="Artists:" HorizontalAlignment="Left" Margin="21,111,-121,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="14"/>
-		<Label Content="OD:" HorizontalAlignment="Left" Margin="21,200,-121,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="14"/>
-		<Label Content="HP:" HorizontalAlignment="Left" Margin="21,244,-121,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="14"/>
-		<TextBox x:Name="ArtistsBox" HorizontalAlignment="Left" Height="29" Margin="126,114,-340,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" FontSize="14" Text="Various"/>
-		<TextBox x:Name="PackNameBox" HorizontalAlignment="Left" Height="29" Margin="126,69,-340,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" FontSize="14" Text="Collection 1st"/>
-		<Label Content="Creator:" HorizontalAlignment="Left" Margin="21,157,-121,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="14"/>
-		<TextBox x:Name="CreatorBox" HorizontalAlignment="Left" Height="29" Margin="126,160,-340,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" FontSize="14"/>
-		<TextBox x:Name="ODBox" HorizontalAlignment="Left" Height="29" Margin="126,201,-212,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" FontSize="14" Text="9"/>
-		<TextBox x:Name="HPBox" HorizontalAlignment="Left" Height="29" Margin="126,247,-212,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" FontSize="14" Text="7.5"/>
-		<Button x:Name="Start" Content="Start" HorizontalAlignment="Left" Margin="244,217,-327,0" VerticalAlignment="Top" Width="83" Height="43" Click="Start_Click"/>
-
+        Title="MapCollator by mint" WindowStyle="ThreeDBorderWindow" Height="338.632" Width="599.387" HorizontalAlignment="Center" VerticalAlignment="Center" ResizeMode="NoResize">
+	<Grid HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="589" Margin="0,0,0,-1.177">
+		<Grid HorizontalAlignment="Left" Margin="126,25,0,0" Width="418" Height="235" VerticalAlignment="Top">
+			<Grid Margin="68.36,61,-47.576,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+				<Label Content="Pack Name:" Width="100" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-40,-20,0,-4"/>
+				<TextBox x:Name="PackNameBox" Height="25" TextWrapping="Wrap" Width="237" FontSize="16" Text="Collection 1st" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,-20,0,-5"/>
+			</Grid>
+			<Grid Margin="68.36,97,-47.576,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+				<Label Content="Artists:" Width="100" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-40,-19,0,-5"/>
+				<TextBox x:Name="ArtistsBox" Height="25" TextWrapping="Wrap" Width="237" FontSize="16" Text="Various" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,-20,0,-5"/>
+			</Grid>
+			<Grid Margin="68.506,214,103.569,-58.912" HorizontalAlignment="Center" VerticalAlignment="Top">
+				<Label Content="HP:" Width="100" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-40,-19,0,-5"/>
+				<TextBox x:Name="HPBox" Height="25" TextWrapping="Wrap" Width="86" FontSize="16" Text="7.5" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,-20,-0.177,-5"/>
+			</Grid>
+			<Grid Margin="68.506,176,103.569,-20.912" HorizontalAlignment="Center" VerticalAlignment="Top">
+				<Label Content="OD:" Width="100" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-40,-19,0,-5"/>
+				<TextBox x:Name="ODBox" Height="25" TextWrapping="Wrap" Width="86" FontSize="16" Text="9" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,-20,-0.177,-5"/>
+			</Grid>
+			<Button x:Name="Start" Content="Start" Width="94" Height="45" Click="Start_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="290,165,0,0"/>
+			<Grid Margin="68.36,135,-47.576,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+				<Label Content="Creator:" Width="100" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-40,-19,0,-5"/>
+				<TextBox x:Name="CreatorBox" Height="25" TextWrapping="Wrap" Width="237" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,-20,0,-5"/>
+			</Grid>
+		</Grid>
+		<Grid HorizontalAlignment="Left" Height="48" Margin="93,6,0,0" VerticalAlignment="Top" Width="426">
+			<TextBox x:Name="PathBox" Height="25" TextWrapping="Wrap" Width="310" FontSize="14" IsEnabled="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,11,0,0"/>
+			<Button x:Name="Botton" Content="..." Width="81" Height="24" Click="Botton_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="330,12,0,0"/>
+		</Grid>
+		<Grid HorizontalAlignment="Left" Height="227" Margin="44,28,0,0" VerticalAlignment="Top" Width="136">
+			<ListBox x:Name="FileBox" HorizontalAlignment="Left" Height="177" VerticalAlignment="Top" Width="136" Margin="0,49,0,0"/>
+		</Grid>
+		<Label Content="Folder list" HorizontalAlignment="Left" Height="24" Margin="38,52,0,0" VerticalAlignment="Top" Width="68"/>
 	</Grid>
 </Window>
