@@ -25,10 +25,14 @@ namespace MapCollator
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         public void Botton_Click(object sender, RoutedEventArgs e)
         {
+            StructuralAnalysis.mainDict.Clear();
+            StructuralAnalysis.opt.Clear();
+
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
             DialogResult result = folderDialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.Cancel)
@@ -37,10 +41,14 @@ namespace MapCollator
             }
             string path = folderDialog.SelectedPath.Trim();
             GlobalValue.path = PathBox.Text = path;
-            string[] pathList = IO.GetFileList(GlobalValue.path, true);
-            foreach (var item in pathList)
+            IO.GetFileList(path);
+            StructuralAnalysis.AnalyzeStructure();
+            foreach (var item in IO.allFileList)
             {
-                FileBox.Items.Add(item.Replace(System.IO.Path.GetDirectoryName(item), ""));
+                if (item.Contains(".osu"))
+                {
+                    ListView.Items.Add(StructuralAnalysis.mainDict[item][1] + "-" + StructuralAnalysis.mainDict[item][0]);
+                }
             }
 
         }
@@ -80,14 +88,20 @@ namespace MapCollator
                     }
                     else
                     {
-                        App.Program.Start(GlobalValue.path, packName, artists, creator, OD, HP);
+                        App.path = GlobalValue.path;
+                        App.packName = packName;
+                        App.artists = artists;
+                        App.creator = creator;
+                        App.OD = OD;
+                        App.HP = HP;
+                        App.Program.Start();
                         PathBox.Clear();
-                        FileBox.Items.Clear();
+                        ListView.Items.Clear();
                     }
 
                 }
             }
-
+            
         }
     }
 }

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MapCollator"
         mc:Ignorable="d"
-        Title="MapCollator by mint" WindowStyle="ThreeDBorderWindow" Height="338.632" Width="599.387" HorizontalAlignment="Center" VerticalAlignment="Center" ResizeMode="NoResize">
+        Title="MapCollator by mint" WindowStyle="ThreeDBorderWindow" Height="338.632" Width="591.488" HorizontalAlignment="Center" VerticalAlignment="Center" ResizeMode="NoResize">
 	<Grid HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="589" Margin="0,0,0,-1.177">
-		<Grid HorizontalAlignment="Left" Margin="126,25,0,0" Width="418" Height="235" VerticalAlignment="Top">
+		<Grid HorizontalAlignment="Left" Margin="117,25,0,0" Width="418" Height="235" VerticalAlignment="Top">
 			<Grid Margin="68.36,61,-47.576,0" HorizontalAlignment="Center" VerticalAlignment="Top">
 				<Label Content="Pack Name:" Width="100" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-40,-20,0,-4"/>
 				<TextBox x:Name="PackNameBox" Height="25" TextWrapping="Wrap" Width="237" FontSize="16" Text="Collection 1st" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,-20,0,-5"/>
@@ -24,19 +24,25 @@
 				<Label Content="OD:" Width="100" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-40,-19,0,-5"/>
 				<TextBox x:Name="ODBox" Height="25" TextWrapping="Wrap" Width="86" FontSize="16" Text="9" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,-20,-0.177,-5"/>
 			</Grid>
-			<Button x:Name="Start" Content="Start" Width="94" Height="45" Click="Start_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="290,165,0,0"/>
+			<Button x:Name="Start" Content="Start" Width="94" Height="45" Click="Start_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="292,165,0,0"/>
 			<Grid Margin="68.36,135,-47.576,0" HorizontalAlignment="Center" VerticalAlignment="Top">
 				<Label Content="Creator:" Width="100" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-40,-19,0,-5"/>
 				<TextBox x:Name="CreatorBox" Height="25" TextWrapping="Wrap" Width="237" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,-20,0,-5"/>
 			</Grid>
 		</Grid>
-		<Grid HorizontalAlignment="Left" Height="48" Margin="93,6,0,0" VerticalAlignment="Top" Width="426">
+		<Grid HorizontalAlignment="Left" Height="48" Margin="88,6,0,0" VerticalAlignment="Top" Width="426">
 			<TextBox x:Name="PathBox" Height="25" TextWrapping="Wrap" Width="310" FontSize="14" IsEnabled="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,11,0,0"/>
 			<Button x:Name="Botton" Content="..." Width="81" Height="24" Click="Botton_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="330,12,0,0"/>
 		</Grid>
-		<Grid HorizontalAlignment="Left" Height="227" Margin="44,28,0,0" VerticalAlignment="Top" Width="136">
-			<ListBox x:Name="FileBox" HorizontalAlignment="Left" Height="177" VerticalAlignment="Top" Width="136" Margin="0,49,0,0"/>
+		<Grid HorizontalAlignment="Left" Height="227" Margin="39,28,0,0" VerticalAlignment="Top" Width="136">
+			<ListView x:Name="ListView" HorizontalAlignment="Left" Height="185" Margin="10,42,0,0" VerticalAlignment="Top" Width="126" IsSynchronizedWithCurrentItem="False">
+				<ListView.View>
+					<GridView>
+						<GridViewColumn/>
+					</GridView>
+				</ListView.View>
+			</ListView>
 		</Grid>
-		<Label Content="Folder list" HorizontalAlignment="Left" Height="24" Margin="38,52,0,0" VerticalAlignment="Top" Width="68"/>
+		<Label Content="Folder list" HorizontalAlignment="Left" Height="24" Margin="50,45,0,0" VerticalAlignment="Top" Width="68"/>
 	</Grid>
 </Window>
