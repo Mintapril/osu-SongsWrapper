@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Forms;
+using WPFFolderBrowser;
 
 
 namespace MapCollator
@@ -22,24 +22,28 @@ namespace MapCollator
     /// </summary>
     public partial class MainWindow : Window
     {
+        string path;
         public MainWindow()
         {
             InitializeComponent();
-            
+            MutiThreading.MakeThreads();
         }
 
         public void Botton_Click(object sender, RoutedEventArgs e)
         {
             StructuralAnalysis.mainDict.Clear();
             StructuralAnalysis.opt.Clear();
+            WPFFolderBrowserDialog wPFFolder = new WPFFolderBrowserDialog();
 
-            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
-            DialogResult result = folderDialog.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.Cancel)
+            wPFFolder.ShowDialog();
+            try
+            {
+                path = wPFFolder.FileName;
+            }
+            catch (InvalidOperationException)
             {
                 return;
             }
-            string path = folderDialog.SelectedPath.Trim();
             GlobalValue.path = PathBox.Text = path;
             IO.GetFileList(path);
             StructuralAnalysis.AnalyzeStructure();
@@ -47,10 +51,12 @@ namespace MapCollator
             {
                 if (item.Contains(".osu"))
                 {
-                    ListView.Items.Add(StructuralAnalysis.mainDict[item][1] + "-" + StructuralAnalysis.mainDict[item][0]);
+                    if (ListView.Items.Contains(StructuralAnalysis.mainDict[item][1]) == false)
+                    {
+                        ListView.Items.Add(StructuralAnalysis.mainDict[item][1] + "-" + StructuralAnalysis.mainDict[item][0] + " [" + StructuralAnalysis.mainDict[item][2] + "]");
+                    }
                 }
             }
-
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
@@ -88,6 +94,7 @@ namespace MapCollator
                     }
                     else
                     {
+                        MainWindow1.Title = "Processing......";
                         App.path = GlobalValue.path;
                         App.packName = packName;
                         App.artists = artists;
@@ -97,11 +104,29 @@ namespace MapCollator
                         App.Program.Start();
                         PathBox.Clear();
                         ListView.Items.Clear();
+                        GlobalValue.path = null;
+                        MainWindow1.Title = "MapCollator by mint";
+                        MessageBox.Show("Packaged successfully!");
+                        App.allFileDict.Clear();
+                        App.allFileList.Clear();
+                        StructuralAnalysis.mainDict.Clear();
+                        StructuralAnalysis.opt.Clear();
+                        IO.allFileList.Clear();
                     }
-
                 }
             }
-            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ListView.Items.Clear();
+            StructuralAnalysis.mainDict.Clear();
+            StructuralAnalysis.opt.Clear();
+            App.allFileDict.Clear();
+            App.allFileList.Clear();
+            IO.allFileList.Clear();
+            PathBox.Clear();
+            GlobalValue.path = null;
         }
     }
 }
